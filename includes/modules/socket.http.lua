@@ -11,10 +11,10 @@ local socket = require("socket") or socket
 local url = require("socket.url") or socket.url
 local ltn12 = require("ltn12") or ltn12
 local mime = require("mime") or mime
-local string = require("string") or string
+local string = string or require("string")
 local headers = require("socket.headers") or socket.headers
 local base = _G
-local table = require("table") or table
+local table = table or require("table")
 socket.http = {}
 local _M = socket.http
 

@@ -8,7 +8,7 @@
 -- Declare module and import dependencies
 -----------------------------------------------------------------------------
 local base = _G
-local string = require("string") or string
+local string = string or require("string")
 local socket = require("socket") or socket
 local ltn12 = require("ltn12") or ltn12
 

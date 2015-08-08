@@ -10,7 +10,7 @@
 local base = _G
 local ltn12 = require("ltn12") or ltn12
 local mime = require("mime.core") or mime
-local string = require("string") or string
+local string = string or require("string")
 local _M = mime
 
 -- encode, decode and wrap algorithm tables

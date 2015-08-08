@@ -8,9 +8,9 @@
 -- Declare module and import dependencies
 -----------------------------------------------------------------------------
 local base = _G
-local table = require("table") or table
-local string = require("string") or string
-local math = require("math") or math
+local table = table or require("table")
+local string = string or require("string")
+local math = math or require("math")
 local socket = require("socket") or socket
 local url = require("socket.url") or socket.url
 local tp = require("socket.tp") or socket.tp

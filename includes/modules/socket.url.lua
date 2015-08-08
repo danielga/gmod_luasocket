@@ -7,9 +7,9 @@
 -----------------------------------------------------------------------------
 -- Declare module
 -----------------------------------------------------------------------------
-local string = require("string") or string
+local string = string or require("string")
 local base = _G
-local table = require("table") or table
+local table = table or require("table")
 local socket = require("socket") or socket
 
 socket.url = {}

@@ -8,10 +8,10 @@
 -- Declare module and import dependencies
 -----------------------------------------------------------------------------
 local base = _G
-local coroutine = require("coroutine") or coroutine
-local string = require("string") or string
-local math = require("math") or math
-local os = require("os") or os
+local coroutine = coroutine or require("coroutine")
+local string = string or require("string")
+local math = math or require("math")
+local os = os or require("os")
 local socket = require("socket") or socket
 local tp = require("socket.tp") or socket.tp
 local ltn12 = require("ltn12") or ltn12
