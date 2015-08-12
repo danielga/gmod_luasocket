@@ -1,5 +1,5 @@
 gmod_luasocket
-A module for Garry's Mod that adds bindings for OS sockets through
+Modules for Garry's Mod that add bindings for OS sockets through
 luasocket.
 -----------------------------------------------------------------------
 Copyright (c) 2015, Daniel Almeida
