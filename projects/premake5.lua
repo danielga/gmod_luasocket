@@ -103,14 +103,14 @@ if os.is("linux") or os.is("macosx") then
 		CreateProject(SERVERSIDE, SOURCES_MANUAL)
 			AddFiles("unix.cpp")
 			IncludeLuaShared()
-			links("unix")
+			links("_unix")
 
 		CreateProject(CLIENTSIDE, SOURCES_MANUAL)
 			AddFiles("unix.cpp")
 			IncludeLuaShared()
-			links("unix")
+			links("_unix")
 
-		project("unix")
+		project("_unix")
 			kind("StaticLib")
 			warnings("Off")
 			defines({
@@ -135,14 +135,14 @@ if os.is("linux") or os.is("macosx") then
 		CreateProject(SERVERSIDE, SOURCES_MANUAL)
 			AddFiles("serial.cpp")
 			IncludeLuaShared()
-			links("serial")
+			links("_serial")
 
 		CreateProject(CLIENTSIDE, SOURCES_MANUAL)
 			AddFiles("serial.cpp")
 			IncludeLuaShared()
-			links("serial")
+			links("_serial")
 
-		project("serial")
+		project("_serial")
 			kind("StaticLib")
 			warnings("Off")
 			defines({
