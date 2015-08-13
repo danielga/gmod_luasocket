@@ -2,6 +2,7 @@
 -- HTTP/1.1 client support for the Lua language.
 -- LuaSocket toolkit.
 -- Author: Diego Nehab
+-- Coroutines version
 -----------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
