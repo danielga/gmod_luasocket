@@ -60,9 +60,9 @@ CreateSolution("socket.core")
 
 		filter("system:not windows")
 			defines({
-				"LUASOCKET_API=__attribute__((visibility(\"default\")))",
-				"UNIX_API=__attribute__((visibility(\"default\")))",
-				"MIME_API=__attribute__((visibility(\"default\")))"
+				"LUASOCKET_API='__attribute__((visibility(\"default\")))'",
+				"UNIX_API='__attribute__((visibility(\"default\")))'",
+				"MIME_API='__attribute__((visibility(\"default\")))'"
 			})
 			files({LUASOCKET_FOLDER .. "/src/usocket.c"})
 
@@ -93,9 +93,9 @@ CreateSolution("mime.core")
 
 		filter("system:not windows")
 			defines({
-				"LUASOCKET_API=__attribute__((visibility(\"default\")))",
-				"UNIX_API=__attribute__((visibility(\"default\")))",
-				"MIME_API=__attribute__((visibility(\"default\")))"
+				"LUASOCKET_API='__attribute__((visibility(\"default\")))'",
+				"UNIX_API='__attribute__((visibility(\"default\")))'",
+				"MIME_API='__attribute__((visibility(\"default\")))'"
 			})
 
 if os.is("linux") or os.is("macosx") then
@@ -114,9 +114,9 @@ if os.is("linux") or os.is("macosx") then
 			kind("StaticLib")
 			warnings("Off")
 			defines({
-				"LUASOCKET_API=__attribute__((visibility(\"default\")))",
-				"UNIX_API=__attribute__((visibility(\"default\")))",
-				"MIME_API=__attribute__((visibility(\"default\")))"
+				"LUASOCKET_API='__attribute__((visibility(\"default\")))'",
+				"UNIX_API='__attribute__((visibility(\"default\")))'",
+				"MIME_API='__attribute__((visibility(\"default\")))'"
 			})
 			includedirs({LUASOCKET_FOLDER .. "/src"})
 			files({
@@ -146,9 +146,9 @@ if os.is("linux") or os.is("macosx") then
 			kind("StaticLib")
 			warnings("Off")
 			defines({
-				"LUASOCKET_API=__attribute__((visibility(\"default\")))",
-				"UNIX_API=__attribute__((visibility(\"default\")))",
-				"MIME_API=__attribute__((visibility(\"default\")))"
+				"LUASOCKET_API='__attribute__((visibility(\"default\")))'",
+				"UNIX_API='__attribute__((visibility(\"default\")))'",
+				"MIME_API='__attribute__((visibility(\"default\")))'"
 			})
 			includedirs({LUASOCKET_FOLDER .. "/src"})
 			files({
