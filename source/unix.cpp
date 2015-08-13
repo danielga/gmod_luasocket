@@ -1,12 +1,12 @@
 #include <GarrysMod/Lua/Interface.h>
 
-extern "C" int luaopen_unix_core( lua_State *state );
+extern "C" int luaopen_socket_unix( lua_State *state );
 
 GMOD_MODULE_OPEN( )
 {
-	LUA->PushSpecial( GarrysMod::Lua::SPECIAL_GLOB );
+	LUA->GetField( GarrysMod::Lua::INDEX_GLOBAL, "socket" );
 
-	if( luaopen_unix_core( state ) == 1 )
+	if( luaopen_socket_unix( state ) == 1 )
 		LUA->SetField( -2, "unix" );
 
 	LUA->Pop( 1 );
@@ -15,8 +15,8 @@ GMOD_MODULE_OPEN( )
 
 GMOD_MODULE_CLOSE( )
 {
-	LUA->PushSpecial( GarrysMod::Lua::SPECIAL_GLOB );
-	
+	LUA->GetField( GarrysMod::Lua::INDEX_GLOBAL, "socket" );
+
 	LUA->PushNil( );
 	LUA->SetField( -2, "unix" );
 

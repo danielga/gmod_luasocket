@@ -60,9 +60,9 @@ CreateSolution("socket.core")
 
 		filter("system:not windows")
 			defines({
-				"LUASOCKET_API='__attribute__((visibility(\"default\")))'",
-				"UNIX_API='__attribute__((visibility(\"default\")))'",
-				"MIME_API='__attribute__((visibility(\"default\")))'"
+				"LUASOCKET_API=''",
+				"UNIX_API=''",
+				"MIME_API=''"
 			})
 			files({LUASOCKET_FOLDER .. "/src/usocket.c"})
 
@@ -93,30 +93,30 @@ CreateSolution("mime.core")
 
 		filter("system:not windows")
 			defines({
-				"LUASOCKET_API='__attribute__((visibility(\"default\")))'",
-				"UNIX_API='__attribute__((visibility(\"default\")))'",
-				"MIME_API='__attribute__((visibility(\"default\")))'"
+				"LUASOCKET_API=''",
+				"UNIX_API=''",
+				"MIME_API=''"
 			})
 
 if os.is("linux") or os.is("macosx") then
-	CreateSolution("unix")
+	CreateSolution("socket.unix")
 		CreateProject(SERVERSIDE, SOURCES_MANUAL)
 			AddFiles("unix.cpp")
 			IncludeLuaShared()
-			links("_unix")
+			links("unix")
 
 		CreateProject(CLIENTSIDE, SOURCES_MANUAL)
 			AddFiles("unix.cpp")
 			IncludeLuaShared()
-			links("_unix")
+			links("unix")
 
-		project("_unix")
+		project("unix")
 			kind("StaticLib")
 			warnings("Off")
 			defines({
-				"LUASOCKET_API='__attribute__((visibility(\"default\")))'",
-				"UNIX_API='__attribute__((visibility(\"default\")))'",
-				"MIME_API='__attribute__((visibility(\"default\")))'"
+				"LUASOCKET_API=''",
+				"UNIX_API=''",
+				"MIME_API=''"
 			})
 			includedirs({LUASOCKET_FOLDER .. "/src"})
 			files({
@@ -131,24 +131,24 @@ if os.is("linux") or os.is("macosx") then
 			vpaths({["Source files"] = LUASOCKET_FOLDER .. "/**.c"})
 			IncludeLuaShared()
 
-	CreateSolution("serial")
+	CreateSolution("socket.serial")
 		CreateProject(SERVERSIDE, SOURCES_MANUAL)
 			AddFiles("serial.cpp")
 			IncludeLuaShared()
-			links("_serial")
+			links("serial")
 
 		CreateProject(CLIENTSIDE, SOURCES_MANUAL)
 			AddFiles("serial.cpp")
 			IncludeLuaShared()
-			links("_serial")
+			links("serial")
 
-		project("_serial")
+		project("serial")
 			kind("StaticLib")
 			warnings("Off")
 			defines({
-				"LUASOCKET_API='__attribute__((visibility(\"default\")))'",
-				"UNIX_API='__attribute__((visibility(\"default\")))'",
-				"MIME_API='__attribute__((visibility(\"default\")))'"
+				"LUASOCKET_API=''",
+				"UNIX_API=''",
+				"MIME_API=''"
 			})
 			includedirs({LUASOCKET_FOLDER .. "/src"})
 			files({
@@ -157,7 +157,7 @@ if os.is("linux") or os.is("macosx") then
 				LUASOCKET_FOLDER .. "/src/io.c",
 				LUASOCKET_FOLDER .. "/src/options.c",
 				LUASOCKET_FOLDER .. "/src/timeout.c",
-				LUASOCKET_FOLDER .. "/src/unix.c",
+				LUASOCKET_FOLDER .. "/src/usocket.c",
 				LUASOCKET_FOLDER .. "/src/serial.c"
 			})
 			vpaths({["Source files"] = LUASOCKET_FOLDER .. "/**.c"})
