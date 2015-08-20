@@ -1,4 +1,5 @@
 #include <GarrysMod/Lua/Interface.h>
+#include <lua.hpp>
 
 extern "C" int luaopen_socket_unix( lua_State *state );
 
