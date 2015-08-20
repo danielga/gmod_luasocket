@@ -7,10 +7,14 @@ GMOD_MODULE_OPEN( )
 	LUA->GetField( GarrysMod::Lua::INDEX_GLOBAL, "socket" );
 
 	if( luaopen_socket_serial( state ) == 1 )
-		LUA->SetField( -2, "serial" );
+	{
+		lua_replace( state, 1 );
+		lua_settop( state, 1 );
+		LUA->Push( -1 );
+		LUA->SetField( -3, "serial" );
+	}
 
-	LUA->Pop( 1 );
-	return 0;
+	return 1;
 }
 
 GMOD_MODULE_CLOSE( )
