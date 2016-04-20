@@ -37,6 +37,7 @@ CreateSolution("socket.core")
 		files({
 			LUASOCKET_FOLDER .. "/src/auxiliar.c",
 			LUASOCKET_FOLDER .. "/src/buffer.c",
+			LUASOCKET_FOLDER .. "/src/compat.c",
 			LUASOCKET_FOLDER .. "/src/except.c",
 			LUASOCKET_FOLDER .. "/src/inet.c",
 			LUASOCKET_FOLDER .. "/src/io.c",
@@ -81,7 +82,10 @@ CreateSolution("mime.core")
 		kind("StaticLib")
 		warnings("Off")
 		includedirs({LUASOCKET_FOLDER .. "/src"})
-		files({LUASOCKET_FOLDER .. "/src/mime.c"})
+		files({
+			LUASOCKET_FOLDER .. "/src/compat.c",
+			LUASOCKET_FOLDER .. "/src/mime.c"
+		})
 		vpaths({["Source files"] = LUASOCKET_FOLDER .. "/**.c"})
 		IncludeLuaShared()
 
@@ -122,6 +126,7 @@ if os.is("linux") or os.is("macosx") then
 			files({
 				LUASOCKET_FOLDER .. "/src/auxiliar.c",
 				LUASOCKET_FOLDER .. "/src/buffer.c",
+				LUASOCKET_FOLDER .. "/src/compat.c",
 				LUASOCKET_FOLDER .. "/src/io.c",
 				LUASOCKET_FOLDER .. "/src/options.c",
 				LUASOCKET_FOLDER .. "/src/timeout.c",
@@ -154,6 +159,7 @@ if os.is("linux") or os.is("macosx") then
 			files({
 				LUASOCKET_FOLDER .. "/src/auxiliar.c",
 				LUASOCKET_FOLDER .. "/src/buffer.c",
+				LUASOCKET_FOLDER .. "/src/compat.c",
 				LUASOCKET_FOLDER .. "/src/io.c",
 				LUASOCKET_FOLDER .. "/src/options.c",
 				LUASOCKET_FOLDER .. "/src/timeout.c",
