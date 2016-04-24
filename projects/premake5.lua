@@ -11,19 +11,19 @@ end
 
 include(gmcommon)
 
-local LUASOCKET_FOLDER = "../luasocket"
+local LUASOCKET_FOLDER = "../luasocket/src"
 
-CreateSolution("socket.core")
-	CreateProject(SERVERSIDE, SOURCES_MANUAL)
-		AddFiles("socket.cpp")
+CreateSolution({name = "socket.core"})
+	CreateProject({serverside = true, manual_files = true})
+		files("../source/socket.cpp")
 		IncludeLuaShared()
 		links("socket")
 
 		filter("system:windows")
 			links("ws2_32")
 
-	CreateProject(CLIENTSIDE, SOURCES_MANUAL)
-		AddFiles("socket.cpp")
+	CreateProject({serverside = false, manual_files = true})
+		files("../source/socket.cpp")
 		IncludeLuaShared()
 		links("socket")
 
@@ -33,22 +33,22 @@ CreateSolution("socket.core")
 	project("socket")
 		kind("StaticLib")
 		warnings("Off")
-		includedirs({LUASOCKET_FOLDER .. "/src"})
+		includedirs(LUASOCKET_FOLDER)
 		files({
-			LUASOCKET_FOLDER .. "/src/auxiliar.c",
-			LUASOCKET_FOLDER .. "/src/buffer.c",
-			LUASOCKET_FOLDER .. "/src/compat.c",
-			LUASOCKET_FOLDER .. "/src/except.c",
-			LUASOCKET_FOLDER .. "/src/inet.c",
-			LUASOCKET_FOLDER .. "/src/io.c",
-			LUASOCKET_FOLDER .. "/src/luasocket.c",
-			LUASOCKET_FOLDER .. "/src/options.c",
-			LUASOCKET_FOLDER .. "/src/select.c",
-			LUASOCKET_FOLDER .. "/src/tcp.c",
-			LUASOCKET_FOLDER .. "/src/timeout.c",
-			LUASOCKET_FOLDER .. "/src/udp.c"
+			LUASOCKET_FOLDER .. "/auxiliar.c",
+			LUASOCKET_FOLDER .. "/buffer.c",
+			LUASOCKET_FOLDER .. "/compat.c",
+			LUASOCKET_FOLDER .. "/except.c",
+			LUASOCKET_FOLDER .. "/inet.c",
+			LUASOCKET_FOLDER .. "/io.c",
+			LUASOCKET_FOLDER .. "/luasocket.c",
+			LUASOCKET_FOLDER .. "/options.c",
+			LUASOCKET_FOLDER .. "/select.c",
+			LUASOCKET_FOLDER .. "/tcp.c",
+			LUASOCKET_FOLDER .. "/timeout.c",
+			LUASOCKET_FOLDER .. "/udp.c"
 		})
-		vpaths({["Source files"] = LUASOCKET_FOLDER .. "/**.c"})
+		vpaths({["Source files/*"] = LUASOCKET_FOLDER .. "/*.c"})
 		IncludeLuaShared()
 
 		filter("system:windows")
@@ -56,7 +56,7 @@ CreateSolution("socket.core")
 				"LUASOCKET_API=__declspec(dllexport)",
 				"MIME_API=__declspec(dllexport)"
 			})
-			files({LUASOCKET_FOLDER .. "/src/wsocket.c"})
+			files(LUASOCKET_FOLDER .. "/wsocket.c")
 			links("ws2_32")
 
 		filter("system:not windows")
@@ -65,28 +65,28 @@ CreateSolution("socket.core")
 				"UNIX_API=''",
 				"MIME_API=''"
 			})
-			files({LUASOCKET_FOLDER .. "/src/usocket.c"})
+			files(LUASOCKET_FOLDER .. "/usocket.c")
 
-CreateSolution("mime.core")
-	CreateProject(SERVERSIDE, SOURCES_MANUAL)
-		AddFiles("mime.cpp")
+CreateSolution({name = "mime.core"})
+	CreateProject({serverside = true, manual_files = true})
+		files("../source/mime.cpp")
 		IncludeLuaShared()
 		links("mime")
 
-	CreateProject(CLIENTSIDE, SOURCES_MANUAL)
-		AddFiles("mime.cpp")
+	CreateProject({serverside = false, manual_files = true})
+		files("../source/mime.cpp")
 		IncludeLuaShared()
 		links("mime")
 
 	project("mime")
 		kind("StaticLib")
 		warnings("Off")
-		includedirs({LUASOCKET_FOLDER .. "/src"})
+		includedirs(LUASOCKET_FOLDER)
 		files({
-			LUASOCKET_FOLDER .. "/src/compat.c",
-			LUASOCKET_FOLDER .. "/src/mime.c"
+			LUASOCKET_FOLDER .. "/compat.c",
+			LUASOCKET_FOLDER .. "/mime.c"
 		})
-		vpaths({["Source files"] = LUASOCKET_FOLDER .. "/**.c"})
+		vpaths({["Source files/*"] = LUASOCKET_FOLDER .. "/*.c"})
 		IncludeLuaShared()
 
 		filter("system:windows")
@@ -103,14 +103,14 @@ CreateSolution("mime.core")
 			})
 
 if os.is("linux") or os.is("macosx") then
-	CreateSolution("socket.unix")
-		CreateProject(SERVERSIDE, SOURCES_MANUAL)
-			AddFiles("unix.cpp")
+	CreateSolution({name = "socket.unix"})
+		CreateProject({serverside = true, manual_files = true})
+			files("../source/unix.cpp")
 			IncludeLuaShared()
 			links("unix")
 
-		CreateProject(CLIENTSIDE, SOURCES_MANUAL)
-			AddFiles("unix.cpp")
+		CreateProject({serverside = false, manual_files = true})
+			files("../source/unix.cpp")
 			IncludeLuaShared()
 			links("unix")
 
@@ -122,28 +122,28 @@ if os.is("linux") or os.is("macosx") then
 				"UNIX_API=''",
 				"MIME_API=''"
 			})
-			includedirs({LUASOCKET_FOLDER .. "/src"})
+			includedirs(LUASOCKET_FOLDER)
 			files({
-				LUASOCKET_FOLDER .. "/src/auxiliar.c",
-				LUASOCKET_FOLDER .. "/src/buffer.c",
-				LUASOCKET_FOLDER .. "/src/compat.c",
-				LUASOCKET_FOLDER .. "/src/io.c",
-				LUASOCKET_FOLDER .. "/src/options.c",
-				LUASOCKET_FOLDER .. "/src/timeout.c",
-				LUASOCKET_FOLDER .. "/src/unix.c",
-				LUASOCKET_FOLDER .. "/src/usocket.c"
+				LUASOCKET_FOLDER .. "/auxiliar.c",
+				LUASOCKET_FOLDER .. "/buffer.c",
+				LUASOCKET_FOLDER .. "/compat.c",
+				LUASOCKET_FOLDER .. "/io.c",
+				LUASOCKET_FOLDER .. "/options.c",
+				LUASOCKET_FOLDER .. "/timeout.c",
+				LUASOCKET_FOLDER .. "/unix.c",
+				LUASOCKET_FOLDER .. "/usocket.c"
 			})
-			vpaths({["Source files"] = LUASOCKET_FOLDER .. "/**.c"})
+			vpaths({["Source files/*"] = LUASOCKET_FOLDER .. "/*.c"})
 			IncludeLuaShared()
 
-	CreateSolution("socket.serial")
-		CreateProject(SERVERSIDE, SOURCES_MANUAL)
-			AddFiles("serial.cpp")
+	CreateSolution({name = "socket.serial"})
+		CreateProject({serverside = true, manual_files = true})
+			files("../source/serial.cpp")
 			IncludeLuaShared()
 			links("serial")
 
-		CreateProject(CLIENTSIDE, SOURCES_MANUAL)
-			AddFiles("serial.cpp")
+		CreateProject({serverside = false, manual_files = true})
+			files("../source/serial.cpp")
 			IncludeLuaShared()
 			links("serial")
 
@@ -155,17 +155,17 @@ if os.is("linux") or os.is("macosx") then
 				"UNIX_API=''",
 				"MIME_API=''"
 			})
-			includedirs({LUASOCKET_FOLDER .. "/src"})
+			includedirs(LUASOCKET_FOLDER .. "/src")
 			files({
-				LUASOCKET_FOLDER .. "/src/auxiliar.c",
-				LUASOCKET_FOLDER .. "/src/buffer.c",
-				LUASOCKET_FOLDER .. "/src/compat.c",
-				LUASOCKET_FOLDER .. "/src/io.c",
-				LUASOCKET_FOLDER .. "/src/options.c",
-				LUASOCKET_FOLDER .. "/src/timeout.c",
-				LUASOCKET_FOLDER .. "/src/usocket.c",
-				LUASOCKET_FOLDER .. "/src/serial.c"
+				LUASOCKET_FOLDER .. "/auxiliar.c",
+				LUASOCKET_FOLDER .. "/buffer.c",
+				LUASOCKET_FOLDER .. "/compat.c",
+				LUASOCKET_FOLDER .. "/io.c",
+				LUASOCKET_FOLDER .. "/options.c",
+				LUASOCKET_FOLDER .. "/timeout.c",
+				LUASOCKET_FOLDER .. "/usocket.c",
+				LUASOCKET_FOLDER .. "/serial.c"
 			})
-			vpaths({["Source files"] = LUASOCKET_FOLDER .. "/**.c"})
+			vpaths({["Source files/*"] = LUASOCKET_FOLDER .. "/*.c"})
 			IncludeLuaShared()
 end
