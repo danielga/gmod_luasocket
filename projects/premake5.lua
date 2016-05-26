@@ -1,7 +1,7 @@
 newoption({
 	trigger = "gmcommon",
 	description = "Sets the path to the garrysmod_common (https://github.com/danielga/garrysmod_common) directory",
-	value = "path to garrysmod_common dir"
+	value = "path to garrysmod_common directory"
 })
 
 local gmcommon = _OPTIONS.gmcommon or os.getenv("GARRYSMOD_COMMON")
@@ -13,7 +13,7 @@ include(gmcommon)
 
 local LUASOCKET_FOLDER = "../luasocket/src"
 
-CreateSolution({name = "socket.core"})
+CreateWorkspace({name = "socket.core"})
 	CreateProject({serverside = true, manual_files = true})
 		files("../source/socket.cpp")
 		IncludeLuaShared()
@@ -67,7 +67,7 @@ CreateSolution({name = "socket.core"})
 			})
 			files(LUASOCKET_FOLDER .. "/usocket.c")
 
-CreateSolution({name = "mime.core"})
+CreateWorkspace({name = "mime.core"})
 	CreateProject({serverside = true, manual_files = true})
 		files("../source/mime.cpp")
 		IncludeLuaShared()
@@ -103,7 +103,7 @@ CreateSolution({name = "mime.core"})
 			})
 
 if os.is("linux") or os.is("macosx") then
-	CreateSolution({name = "socket.unix"})
+	CreateWorkspace({name = "socket.unix"})
 		CreateProject({serverside = true, manual_files = true})
 			files("../source/unix.cpp")
 			IncludeLuaShared()
@@ -136,7 +136,7 @@ if os.is("linux") or os.is("macosx") then
 			vpaths({["Source files/*"] = LUASOCKET_FOLDER .. "/*.c"})
 			IncludeLuaShared()
 
-	CreateSolution({name = "socket.serial"})
+	CreateWorkspace({name = "socket.serial"})
 		CreateProject({serverside = true, manual_files = true})
 			files("../source/serial.cpp")
 			IncludeLuaShared()
