@@ -15,8 +15,7 @@ GMOD_MODULE_OPEN( )
 
 GMOD_MODULE_CLOSE( )
 {
-	if( luaopen_mime_core( LUA->state ) == 1 )
-		LUA->SetField( GarrysMod::Lua::INDEX_GLOBAL, "mime" );
-
+	LUA->PushNil( );
+	LUA->SetField( GarrysMod::Lua::INDEX_GLOBAL, "mime" );
 	return 0;
 }

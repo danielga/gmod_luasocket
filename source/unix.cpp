@@ -9,8 +9,8 @@ GMOD_MODULE_OPEN( )
 
 	if( luaopen_socket_unix( LUA->state ) == 1 )
 	{
-		lua_replace( state, 1 );
-		lua_settop( state, 1 );
+		lua_replace( LUA->state, 1 );
+		lua_settop( LUA->state, 1 );
 		LUA->Push( -1 );
 		LUA->SetField( -3, "unix" );
 	}
