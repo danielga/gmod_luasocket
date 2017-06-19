@@ -7,10 +7,10 @@ GMOD_MODULE_OPEN( )
 {
 	LUA->GetField( GarrysMod::Lua::INDEX_GLOBAL, "socket" );
 
-	if( luaopen_socket_unix( LUA->state ) == 1 )
+	if( luaopen_socket_unix( LUA->GetState() ) == 1 )
 	{
-		lua_replace( LUA->state, 1 );
-		lua_settop( LUA->state, 1 );
+		lua_replace( LUA->GetState(), 1 );
+		lua_settop( LUA->GetState(), 1 );
 		LUA->Push( -1 );
 		LUA->SetField( -3, "unix" );
 	}
