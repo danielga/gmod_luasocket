@@ -4,18 +4,15 @@ newoption({
 	value = "path to garrysmod_common directory"
 })
 
-local gmcommon = _OPTIONS.gmcommon or os.getenv("GARRYSMOD_COMMON")
-if gmcommon == nil then
-	error("you didn't provide a path to your garrysmod_common (https://github.com/danielga/garrysmod_common) directory")
-end
+local gmcommon = assert(_OPTIONS.gmcommon or os.getenv("GARRYSMOD_COMMON"),
+	"you didn't provide a path to your garrysmod_common (https://github.com/danielga/garrysmod_common) directory")
+include(path.join(gmcommon, "generator.v2.lua"))
 
-include(gmcommon)
-
-local LUASOCKET_FOLDER = "../luasocket/src"
+local LUASOCKET_FOLDER = "luasocket/src"
 
 CreateWorkspace({name = "socket.core"})
 	CreateProject({serverside = true, manual_files = true})
-		files("../source/socket.cpp")
+		files("source/socket.cpp")
 		IncludeLuaShared()
 		links("socket")
 
@@ -23,7 +20,7 @@ CreateWorkspace({name = "socket.core"})
 			links("ws2_32")
 
 	CreateProject({serverside = false, manual_files = true})
-		files("../source/socket.cpp")
+		files("source/socket.cpp")
 		IncludeLuaShared()
 		links("socket")
 
@@ -32,7 +29,7 @@ CreateWorkspace({name = "socket.core"})
 
 	project("socket")
 		kind("StaticLib")
-		warnings("Off")
+		warnings("Default")
 		includedirs(LUASOCKET_FOLDER)
 		files({
 			LUASOCKET_FOLDER .. "/auxiliar.c",
@@ -69,18 +66,18 @@ CreateWorkspace({name = "socket.core"})
 
 CreateWorkspace({name = "mime.core"})
 	CreateProject({serverside = true, manual_files = true})
-		files("../source/mime.cpp")
+		files("source/mime.cpp")
 		IncludeLuaShared()
 		links("mime")
 
 	CreateProject({serverside = false, manual_files = true})
-		files("../source/mime.cpp")
+		files("source/mime.cpp")
 		IncludeLuaShared()
 		links("mime")
 
 	project("mime")
 		kind("StaticLib")
-		warnings("Off")
+		warnings("Default")
 		includedirs(LUASOCKET_FOLDER)
 		files({
 			LUASOCKET_FOLDER .. "/compat.c",
@@ -102,21 +99,21 @@ CreateWorkspace({name = "mime.core"})
 				"MIME_API=''"
 			})
 
-if os.is("linux") or os.is("macosx") then
+if os.istarget("linux") or os.istarget("macosx") then
 	CreateWorkspace({name = "socket.unix"})
 		CreateProject({serverside = true, manual_files = true})
-			files("../source/unix.cpp")
+			files("source/unix.cpp")
 			IncludeLuaShared()
 			links("unix")
 
 		CreateProject({serverside = false, manual_files = true})
-			files("../source/unix.cpp")
+			files("source/unix.cpp")
 			IncludeLuaShared()
 			links("unix")
 
 		project("unix")
 			kind("StaticLib")
-			warnings("Off")
+			warnings("Default")
 			defines({
 				"LUASOCKET_API=''",
 				"UNIX_API=''",
@@ -138,18 +135,18 @@ if os.is("linux") or os.is("macosx") then
 
 	CreateWorkspace({name = "socket.serial"})
 		CreateProject({serverside = true, manual_files = true})
-			files("../source/serial.cpp")
+			files("source/serial.cpp")
 			IncludeLuaShared()
 			links("serial")
 
 		CreateProject({serverside = false, manual_files = true})
-			files("../source/serial.cpp")
+			files("source/serial.cpp")
 			IncludeLuaShared()
 			links("serial")
 
 		project("serial")
 			kind("StaticLib")
-			warnings("Off")
+			warnings("Default")
 			defines({
 				"LUASOCKET_API=''",
 				"UNIX_API=''",
