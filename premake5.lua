@@ -10,6 +10,11 @@ local gmcommon = assert(_OPTIONS.gmcommon or os.getenv("GARRYSMOD_COMMON"),
 	"you didn't provide a path to your garrysmod_common (https://github.com/danielga/garrysmod_common) directory")
 include(gmcommon)
 
+newoption({
+	trigger = "enable-whitelist",
+	description = "Enables a whitelist file to filter valid addresses and ports"
+})
+
 local LUASOCKET_FOLDER = "luasocket/src"
 
 CreateWorkspace({name = "socket.core"})
@@ -23,6 +28,9 @@ CreateWorkspace({name = "socket.core"})
 		links("luasocket") -- luasocket needs to be linked before lua_shared
 		IncludeLuaShared()
 
+		filter("options:enable-whitelist")
+			defines("LUASOCKET_ENABLE_WHITELIST")
+
 		filter("system:windows")
 			links("ws2_32")
 
@@ -30,6 +38,9 @@ CreateWorkspace({name = "socket.core"})
 		files("source/socket.cpp")
 		links("luasocket") -- luasocket needs to be linked before lua_shared
 		IncludeLuaShared()
+
+		filter("options:enable-whitelist")
+			defines("LUASOCKET_ENABLE_WHITELIST")
 
 		filter("system:windows")
 			links("ws2_32")
