@@ -4,7 +4,14 @@ newoption({
 	value = "path to garrysmod_common directory"
 })
 
+newoption({
+	trigger = "whitelist",
+	description = "Enables wrapping of getaddrinfo and a whitelist file to filter valid addresses and ports",
+	value = "0 or 1"
+})
+
 local gmcommon = _OPTIONS.gmcommon or os.getenv("GARRYSMOD_COMMON")
+local whitelist = _OPTIONS.whitelist == "1"
 if gmcommon == nil then
 	error("you didn't provide a path to your garrysmod_common (https://github.com/danielga/garrysmod_common) directory")
 end
@@ -16,6 +23,7 @@ local LUASOCKET_FOLDER = "../luasocket/src"
 CreateWorkspace({name = "socket.core"})
 	CreateProject({serverside = true, manual_files = true})
 		files("../source/socket.cpp")
+		if whitelist then files("../source/whitelist.cpp") defines({"USE_WHITELIST"}) includedirs(LUASOCKET_FOLDER) end
 		IncludeLuaShared()
 		links("socket")
 
@@ -24,6 +32,7 @@ CreateWorkspace({name = "socket.core"})
 
 	CreateProject({serverside = false, manual_files = true})
 		files("../source/socket.cpp")
+		if whitelist then files("../source/whitelist.cpp") defines({"USE_WHITELIST"}) includedirs(LUASOCKET_FOLDER) end
 		IncludeLuaShared()
 		links("socket")
 
@@ -56,6 +65,7 @@ CreateWorkspace({name = "socket.core"})
 				"LUASOCKET_API=__declspec(dllexport)",
 				"MIME_API=__declspec(dllexport)"
 			})
+			if whitelist then defines({"getaddrinfo=__wrap_getaddrinfo"}) end
 			files(LUASOCKET_FOLDER .. "/wsocket.c")
 			links("ws2_32")
 
@@ -65,6 +75,7 @@ CreateWorkspace({name = "socket.core"})
 				"UNIX_API=''",
 				"MIME_API=''"
 			})
+			if whitelist then defines({"getaddrinfo=__wrap_getaddrinfo"}) end
 			files(LUASOCKET_FOLDER .. "/usocket.c")
 
 CreateWorkspace({name = "mime.core"})
