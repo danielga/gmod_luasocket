@@ -59,7 +59,7 @@ void clearWhitelist()
 	whitelist.clear();
 }
 
-bool isSafe(const char* pNodeName, const char* pServiceName)
+bool isSafe(const std::string& pNodeName, const std::string& pServiceName)
 {
 	std::map<std::string, std::vector<std::regex> >::iterator domains = whitelist.find(pServiceName);
 	if (domains != whitelist.end())
