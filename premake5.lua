@@ -13,16 +13,16 @@ local LUASOCKET_FOLDER = "luasocket/src"
 CreateWorkspace({name = "socket.core"})
 	CreateProject({serverside = true, manual_files = true})
 		files("source/socket.cpp")
+		links("socket") -- socket needs to be linked before lua_shared
 		IncludeLuaShared()
-		links("socket")
 
 		filter("system:windows")
 			links("ws2_32")
 
 	CreateProject({serverside = false, manual_files = true})
 		files("source/socket.cpp")
+		links("socket") -- socket needs to be linked before lua_shared
 		IncludeLuaShared()
-		links("socket")
 
 		filter("system:windows")
 			links("ws2_32")
@@ -67,13 +67,13 @@ CreateWorkspace({name = "socket.core"})
 CreateWorkspace({name = "mime.core"})
 	CreateProject({serverside = true, manual_files = true})
 		files("source/mime.cpp")
+		links("mime") -- mime needs to be linked before lua_shared
 		IncludeLuaShared()
-		links("mime")
 
 	CreateProject({serverside = false, manual_files = true})
 		files("source/mime.cpp")
+		links("mime") -- mime needs to be linked before lua_shared
 		IncludeLuaShared()
-		links("mime")
 
 	project("mime")
 		kind("StaticLib")
@@ -103,13 +103,13 @@ if os.istarget("linux") or os.istarget("macosx") then
 	CreateWorkspace({name = "socket.unix"})
 		CreateProject({serverside = true, manual_files = true})
 			files("source/unix.cpp")
+			links("unix") -- unix needs to be linked before lua_shared
 			IncludeLuaShared()
-			links("unix")
 
 		CreateProject({serverside = false, manual_files = true})
 			files("source/unix.cpp")
+			links("unix") -- unix needs to be linked before lua_shared
 			IncludeLuaShared()
-			links("unix")
 
 		project("unix")
 			kind("StaticLib")
@@ -136,13 +136,13 @@ if os.istarget("linux") or os.istarget("macosx") then
 	CreateWorkspace({name = "socket.serial"})
 		CreateProject({serverside = true, manual_files = true})
 			files("source/serial.cpp")
+			links("serial") -- serial needs to be linked before lua_shared
 			IncludeLuaShared()
-			links("serial")
 
 		CreateProject({serverside = false, manual_files = true})
 			files("source/serial.cpp")
+			links("serial") -- serial needs to be linked before lua_shared
 			IncludeLuaShared()
-			links("serial")
 
 		project("serial")
 			kind("StaticLib")
