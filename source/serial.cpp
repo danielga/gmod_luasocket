@@ -5,16 +5,13 @@ extern "C" int luaopen_socket_serial( lua_State *state );
 
 GMOD_MODULE_OPEN( )
 {
+	if( luaopen_socket_serial( LUA->GetState( ) ) != 1 )
+		return 0;
+
 	LUA->GetField( GarrysMod::Lua::INDEX_GLOBAL, "socket" );
-
-	if( luaopen_socket_serial( LUA->GetState( ) ) == 1 )
-	{
-		lua_replace( LUA->GetState( ), 1 );
-		lua_settop( LUA->GetState( ), 1 );
-		LUA->Push( -1 );
-		LUA->SetField( -3, "serial" );
-	}
-
+	LUA->Push( -2 );
+	LUA->SetField( -2, "serial" );
+	LUA->Pop( 1 );
 	return 1;
 }
 
