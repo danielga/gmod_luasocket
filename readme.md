@@ -8,7 +8,7 @@ Modules for Garry's Mod that add bindings for OS sockets through [luasocket][1].
 
 This project is composed by the Lua modules (in `includes/modules`) and the internal binary modules (`socket.core`, `mime.core`, `unix` and `serial`, where the last two are Unix only).
 
-You can also refer to this project as `gm\_luasocket` or `Luasocket for Garry's Mod`.
+You can also refer to this project as `gm_luasocket` or `Luasocket for Garry's Mod`.
 
 The Lua files go into `lua/includes/modules` (just copy the `includes` directory from this repository onto `lua`) and the binary modules go into `lua/bin`.
 
