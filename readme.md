@@ -1,5 +1,7 @@
 # gmod\_luasocket
 
+[![Build Status](https://metamann.visualstudio.com/GitHub%20danielga/_apis/build/status/danielga.gmod_luasocket?branchName=refs%2Ftags%2Fr1)](https://metamann.visualstudio.com/GitHub%20danielga/_build/latest?definitionId=15&branchName=refs%2Ftags%2Fr1)
+
 Modules for Garry's Mod that add bindings for OS sockets through [luasocket][1].
 
 ## General information
